@@ -1,1 +1,20 @@
-<p>book-card works!</p>
+<mat-card *ngIf="books" class="card" [ngStyle]="{backgroundColor: bColor}">
+    <div class="spacer"></div>
+    <mat-card-header>
+      <mat-card-subtitle class="card-author" *ngIf="books.authors && books.authors.length> 0">{{ books.authors[0].name }}</mat-card-subtitle>
+      <mat-card-title>{{ books.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ books.subjects[0] }}</p>
+      <div class="spacer"></div>
+      <hr>
+    </mat-card-content>
+    <mat-card-actions>
+      <a routerLink="/book-details/{{ books.id }}"><mat-icon> info</mat-icon></a>
+      <button (click)="storage.toggleFavourites(books)">
+        <mat-icon *ngIf="!storage.isFavourite(books)">favorite</mat-icon>
+        <mat-icon *ngIf="storage.isFavourite(books)">heart_broken</mat-icon>
+      </button>
+    </mat-card-actions>
+    <mat-card-footer></mat-card-footer>
+</mat-card>
